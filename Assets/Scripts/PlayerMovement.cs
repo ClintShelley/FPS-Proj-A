@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -29.43f;
     public float jumpHeight = 1f;
     public float sprintJumpHeight = 1.5f;
+    public bool sprinting = false;
 
     Vector3 velocity;
 
@@ -21,11 +23,19 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
+    //Foot step audio stuff
+    float timeSinceStep = 0;
+    AudioSource audioSource;
+    Vector3 move;
+    [SerializeField] AudioClip footstep1;
+    [SerializeField] AudioClip footstep2;
+    [SerializeField] AudioClip footstep3;
+    [SerializeField] AudioClip footstep4;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if(isGrounded && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
@@ -41,21 +51,25 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         //run function
-        if(Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
         {
+            sprinting = true;
             speed = 10f;
         }
         else if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.LeftShift))
         {
+            sprinting = true;
             speed = 10f;
         }
 
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            sprinting = false;
             speed = 7f;
         }
         else
         {
+            sprinting = false;
             speed = 7f;
         }
 
@@ -64,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
         //If touching ground allow jump
-        if(Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.LeftShift) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(sprintJumpHeight * -2f * gravity);
         }
@@ -76,5 +90,63 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (move.x != 0 && isGrounded)
+        {
+            processFootSteps();
+        }
+    }
+    //generate a random audio step
+    void processFootSteps()
+    {
+        timeSinceStep += Time.deltaTime;
+        if (isGrounded == true && sprinting == false && timeSinceStep > 0.6)
+        {
+            int randomSound = Random.Range(1, 4);
+            switch (randomSound)
+            {
+                case 1:
+                    // print("playedsound1");
+                    audioSource.PlayOneShot(footstep1);
+                    break;
+                case 2:
+                    //print("playedsound2");
+                    audioSource.PlayOneShot(footstep2);
+                    break;
+                case 3:
+                    // print("playedsound3");
+                    audioSource.PlayOneShot(footstep3);
+                    break;
+                case 4:
+                    //  print("playedsound4");
+                    audioSource.PlayOneShot(footstep4);
+                    break;
+            }
+            timeSinceStep = 0;
+        }
+        else if (isGrounded == true && sprinting == true && timeSinceStep > 0.2)
+        {
+            int randomSound = Random.Range(1, 4);
+            switch (randomSound)
+            {
+                case 1:
+                    // print("playedsound1");
+                    audioSource.PlayOneShot(footstep1);
+                    break;
+                case 2:
+                    //print("playedsound2");
+                    audioSource.PlayOneShot(footstep2);
+                    break;
+                case 3:
+                    // print("playedsound3");
+                    audioSource.PlayOneShot(footstep3);
+                    break;
+                case 4:
+                    //  print("playedsound4");
+                    audioSource.PlayOneShot(footstep4);
+                    break;
+            }
+            timeSinceStep = 0;
+        }
     }
 }
