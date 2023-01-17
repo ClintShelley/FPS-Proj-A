@@ -31,6 +31,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip footstep2;
     [SerializeField] AudioClip footstep3;
     [SerializeField] AudioClip footstep4;
+    [SerializeField] AudioClip footstep5;
+    [SerializeField] AudioClip footstep1S;
+    [SerializeField] AudioClip footstep2S;
+    [SerializeField] AudioClip footstep3S;
+    [SerializeField] AudioClip footstep4S;
+    [SerializeField] AudioClip footstep5S;
+    [SerializeField] AudioClip Jumped;
 
     // Start is called before the first frame update
     void Start()
@@ -80,10 +87,12 @@ public class PlayerMovement : MonoBehaviour
         //If touching ground allow jump
         if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.LeftShift) && isGrounded)
         {
+            audioSource.PlayOneShot(Jumped);
             velocity.y = Mathf.Sqrt(sprintJumpHeight * -2f * gravity);
         }
         else if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            audioSource.PlayOneShot(Jumped);
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
@@ -102,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         timeSinceStep += Time.deltaTime;
         if (isGrounded == true && sprinting == false && timeSinceStep > 0.6)
         {
-            int randomSound = Random.Range(1, 4);
+            int randomSound = Random.Range(1, 5);
             switch (randomSound)
             {
                 case 1:
@@ -120,30 +129,38 @@ public class PlayerMovement : MonoBehaviour
                 case 4:
                     //  print("playedsound4");
                     audioSource.PlayOneShot(footstep4);
+                    break;
+                case 5:
+                    //  print("playedsound5");
+                    audioSource.PlayOneShot(footstep5);
                     break;
             }
             timeSinceStep = 0;
         }
-        else if (isGrounded == true && sprinting == true && timeSinceStep > 0.2)
+        else if (isGrounded == true && sprinting == true && timeSinceStep > 0.3)
         {
-            int randomSound = Random.Range(1, 4);
+            int randomSound = Random.Range(1, 5);
             switch (randomSound)
             {
                 case 1:
                     // print("playedsound1");
-                    audioSource.PlayOneShot(footstep1);
+                    audioSource.PlayOneShot(footstep1S);
                     break;
                 case 2:
                     //print("playedsound2");
-                    audioSource.PlayOneShot(footstep2);
+                    audioSource.PlayOneShot(footstep2S);
                     break;
                 case 3:
                     // print("playedsound3");
-                    audioSource.PlayOneShot(footstep3);
+                    audioSource.PlayOneShot(footstep3S);
                     break;
                 case 4:
                     //  print("playedsound4");
-                    audioSource.PlayOneShot(footstep4);
+                    audioSource.PlayOneShot(footstep4S);
+                    break;
+                case 5:
+                    //  print("playedsound5");
+                    audioSource.PlayOneShot(footstep5S);
                     break;
             }
             timeSinceStep = 0;

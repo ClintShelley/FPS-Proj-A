@@ -590,6 +590,13 @@ MonoBehaviour:
   footstep2: {fileID: 8300000, guid: 8501adb195de89247b518afb9d8e8280, type: 3}
   footstep3: {fileID: 8300000, guid: 42b3fe7bd6d44a149a3a0561af0b56ff, type: 3}
   footstep4: {fileID: 8300000, guid: 4e68b7871f497374e89d38a89c748a3d, type: 3}
+  footstep5: {fileID: 8300000, guid: 05f658385d6d2ad4a9b1fde5df0a7207, type: 3}
+  footstep1S: {fileID: 8300000, guid: 6c69454da4a47d04e83f126ade8fb6ad, type: 3}
+  footstep2S: {fileID: 8300000, guid: 92c7a34732a7e2c40bfd56d886df194f, type: 3}
+  footstep3S: {fileID: 8300000, guid: 92e5abb9ba4ab2b4da5a4e4b667a8935, type: 3}
+  footstep4S: {fileID: 8300000, guid: 7bb00a46a27b81c4ab9b6378a78f6584, type: 3}
+  footstep5S: {fileID: 8300000, guid: 152f2c1a261538f449c9d74a7d035878, type: 3}
+  Jumped: {fileID: 8300000, guid: 877394c408c12d0499ba1df71be4b77f, type: 3}
 --- !u!136 &1276539876
 CapsuleCollider:
   m_ObjectHideFlags: 0
