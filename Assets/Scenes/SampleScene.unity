@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 1276539875}
   - component: {fileID: 1276539880}
   - component: {fileID: 1276539881}
+  - component: {fileID: 1276539882}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -792,6 +793,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1276539882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276539873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c646a6f1726ceb7418874559c3f5f56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 0}
+  MyHealth: 100
+  Hurting: {fileID: 8300000, guid: a2f74a2a7fdcd2f4fbe16d4c0630e335, type: 3}
 --- !u!1 &1689111672
 GameObject:
   m_ObjectHideFlags: 0
